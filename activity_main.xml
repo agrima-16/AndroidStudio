@@ -5,13 +5,36 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.agrima.listview.MainActivity">
+    tools:context="com.example.agrima.phonebook.MainActivity">
 
-    <Spinner
+   <Button
+       android:layout_width="fill_parent"
+       android:layout_height="wrap_content"
+       android:id="@+id/maa"
+       android:text="Mummy"
+       android:textStyle="italic"
+       android:textColor="#800000" />
+
+    <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/listview">
-    </Spinner>
+        android:id="@+id/pa"
+        android:text="Papa"
+        android:textStyle="italic"
+        android:textColor="#0000FF" />
 
-
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/bh"
+        android:text="Bhai"
+        android:textStyle="italic"
+        android:textColor="#000080" />
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/di"
+        android:text="Didi"
+        android:textStyle="italic"
+        android:textColor="#00FFFF" />
 </LinearLayout>

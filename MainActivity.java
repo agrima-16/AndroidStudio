@@ -1,90 +1,69 @@
-package com.example.agrima.listview;
+package com.example.agrima.phonebook;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
-    Spinner list;
-    String data[]={"Agrima","Kajal","Priyanshi"};
+    Button maa,pa,bh,di;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        list=(Spinner) findViewById(R.id.listview);
-
-        ArrayAdapter adapter=new ArrayAdapter(MainActivity.this,
-                android.R.layout.simple_list_item_1,data);
-        list.setAdapter(adapter);
-        list.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-
-
-
+        findViewById(R.id.maa).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-                // TextView txt=(TextView)view;
-//                //Toast.makeText(MainActivity.this,txt.getText().toString(),Toast.LENGTH_SHORT).show();
+            public void onClick(View view) {
+                dialContact("7355632925");
 
-                switch (position)
-
-                {  case 0:
-                        Toast.makeText(MainActivity.this, "First",
-                                Toast.LENGTH_SHORT).show();
-                        break;
-                    case 1:
-                        Toast.makeText(MainActivity.this, "Second",
-                                Toast.LENGTH_SHORT).show();
-                        break;
-                    case 2:
-                        Toast.makeText(MainActivity.this, "Third",
-                                Toast.LENGTH_SHORT).show();
-                        break;
-//
-//
-//                }
-
-
-                }
             }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
+            private void dialContact(String s) {
+                startActivity(new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", s, null)));
+            }
 
-           }
+            {
+                findViewById(R.id.pa).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialContact("9839227068");
+                    }
+
+                    private void dialContact(String s) {
+                        startActivity(new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", s, null)));
+                    }
+
+                    {
+                        findViewById(R.id.bh).setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                dialContact("7007495458");
+                            }
+
+                            private void dialContact(String s) {
+                                startActivity(new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", s, null)));
+                            }
+
+                            {
+                                findViewById(R.id.di).setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        dialContact("9628052305");
+                                    }
+
+                                    private void dialContact(String s) {
+                                        startActivity(new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", s, null)));
+                                    }
+                                });
+                            }
+                        });
+
+                    }
+
+                });
+            }
         });
-
-//        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent , View view, int position, long id) {
-//               // TextView txt=(TextView)view;
-//                //Toast.makeText(MainActivity.this,txt.getText().toString(),Toast.LENGTH_SHORT).show();
-//                switch (position){
-//                    case 0:
-//                        Toast.makeText(MainActivity.this, "First",
-//                                Toast.LENGTH_SHORT).show();
-//                        break;
-//                    case 1:
-//                        Toast.makeText(MainActivity.this, "Second",
-//                                Toast.LENGTH_SHORT).show();
-//                        break;
-//                    case 2:
-//                        Toast.makeText(MainActivity.this, "Third",
-//                                Toast.LENGTH_SHORT).show();
-//                        break;
-//
-//
-//                }
-//
-//
-//            }
-//        });
-    }
-}
+    }}
