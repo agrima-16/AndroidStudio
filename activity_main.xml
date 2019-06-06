@@ -5,22 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.agrima.dialing.MainActivity">
-<EditText
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:inputType="number"
-    android:hint="Enter no"
-    android:id="@+id/no" />
-    <Button
+    tools:context="com.example.agrima.listview.MainActivity">
+
+    <Spinner
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Dialing"
-        android:id="@+id/dialing"
-        android:textStyle="bold"
-        android:textColor="#000"/>
-
-
+        android:id="@+id/listview">
+    </Spinner>
 
 
 </LinearLayout>

@@ -1,44 +1,90 @@
-package com.example.agrima.dialing;
+package com.example.agrima.listview;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-
-import org.w3c.dom.Text;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-    EditText txt;
-    Button dialing;
-
+    Spinner list;
+    String data[]={"Agrima","Kajal","Priyanshi"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        txt=(EditText)findViewById(R.id.no);
-        dialing=(Button)findViewById(R.id.dialing);
+        list=(Spinner) findViewById(R.id.listview);
 
-        dialing.setOnClickListener(new View.OnClickListener() {
+        ArrayAdapter adapter=new ArrayAdapter(MainActivity.this,
+                android.R.layout.simple_list_item_1,data);
+        list.setAdapter(adapter);
+        list.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+
+
+
             @Override
-            public void onClick(View v) {
-                String txt1=txt.getText().toString();
-                if(TextUtils.isEmpty(txt1))
-                {
-                    txt.setError("Enter no");
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+                // TextView txt=(TextView)view;
+//                //Toast.makeText(MainActivity.this,txt.getText().toString(),Toast.LENGTH_SHORT).show();
 
-                }
-                else
-                {
-                    Intent i=new Intent(Intent.ACTION_DIAL,
-                            Uri.parse("tel:"+txt1));
-                    startActivity(i);
+                switch (position)
+
+                {  case 0:
+                        Toast.makeText(MainActivity.this, "First",
+                                Toast.LENGTH_SHORT).show();
+                        break;
+                    case 1:
+                        Toast.makeText(MainActivity.this, "Second",
+                                Toast.LENGTH_SHORT).show();
+                        break;
+                    case 2:
+                        Toast.makeText(MainActivity.this, "Third",
+                                Toast.LENGTH_SHORT).show();
+                        break;
+//
+//
+//                }
+
+
                 }
             }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+           }
         });
+
+//        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent , View view, int position, long id) {
+//               // TextView txt=(TextView)view;
+//                //Toast.makeText(MainActivity.this,txt.getText().toString(),Toast.LENGTH_SHORT).show();
+//                switch (position){
+//                    case 0:
+//                        Toast.makeText(MainActivity.this, "First",
+//                                Toast.LENGTH_SHORT).show();
+//                        break;
+//                    case 1:
+//                        Toast.makeText(MainActivity.this, "Second",
+//                                Toast.LENGTH_SHORT).show();
+//                        break;
+//                    case 2:
+//                        Toast.makeText(MainActivity.this, "Third",
+//                                Toast.LENGTH_SHORT).show();
+//                        break;
+//
+//
+//                }
+//
+//
+//            }
+//        });
     }
 }
