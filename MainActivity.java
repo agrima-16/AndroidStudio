@@ -1,69 +1,97 @@
-package com.example.agrima.phonebook;
+package sharda.ac.in.loginactivity;
 
-import android.content.Intent;
-import android.net.Uri;
+import android.app.Activity;
+import android.app.VoiceInteractor;
+import android.preference.PreferenceActivity;
+import android.preference.PreferenceActivity.Header;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.Toast;
+
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-    Button maa,pa,bh,di;
+    EditText editTextUserName, textPassword;
+    Button btnSubmit;
+    AsyncHttpClient client;
+    RequestParams params;
+    ListView list;
+    ArrayList listdata;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        findViewById(R.id.maa).setOnClickListener(new View.OnClickListener() {
+        editTextUserName = (EditText) findViewById(R.id.editTextUserName);
+        textPassword = (EditText) findViewById(R.id.editTextPassword);
+        list = (ListView) findViewById(R.id.list);
+        btnSubmit = (Button) findViewById(R.id.btnSubmit);
+        listdata = new ArrayList();
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                dialContact("7355632925");
+            public void onClick(View v) {
+                if (TextUtils.isEmpty(editTextUserName.getText().toString())) {
+                    editTextUserName.setError("Enter Name");
+                } else if (TextUtils.isEmpty(textPassword.getText().toString())) {
+                    textPassword.setError("Enter Password");
+                } else {
+                    client = new AsyncHttpClient();
+                    params = new RequestParams();
+                    client.get("https://jsonplaceholder.typicode.com/posts", new AsyncHttpResponseHandler() {
+                        @Override
+                        public void onSuccess(int statusCode, cz.msebera.android.httpclient.Header[] headers, byte[] responseBody) {
+                            String data = new String(responseBody);
+                            Log.d("Agrima", data);
+                            try {
+                                JSONArray array = new JSONArray(data);
+                                for (int i = 0; i < array.length(); i++) {
+                                    JSONObject jsnobj = array.getJSONObject(i);
+                                    int userId = jsnobj.getInt("userId");
+                                    int id = jsnobj.getInt("id");
+                                    String title = jsnobj.getString("title");
+                                    String body = jsnobj.getString("body");
+                                    listdata.add(userId+"\n"+id+"\n"+title+"\n"+body);
 
-            }
+                                    ArrayAdapter adapter=new ArrayAdapter(MainActivity.this,
+                                            android.R.layout.simple_list_item_1,listdata);
+                                    list.setAdapter(adapter);
+                                }
 
-            private void dialContact(String s) {
-                startActivity(new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", s, null)));
-            }
 
-            {
-                findViewById(R.id.pa).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        dialContact("9839227068");
-                    }
-
-                    private void dialContact(String s) {
-                        startActivity(new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", s, null)));
-                    }
-
-                    {
-                        findViewById(R.id.bh).setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                dialContact("7007495458");
+                            } catch (JSONException je) {
+                                je.printStackTrace();
                             }
 
-                            private void dialContact(String s) {
-                                startActivity(new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", s, null)));
-                            }
 
-                            {
-                                findViewById(R.id.di).setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View view) {
-                                        dialContact("9628052305");
-                                    }
+                        }
 
-                                    private void dialContact(String s) {
-                                        startActivity(new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", s, null)));
-                                    }
-                                });
-                            }
-                        });
+                        @Override
+                        public void onFailure(int statusCode, cz.msebera.android.httpclient.Header[] headers,
+                                              byte[] responseBody, Throwable error) {
 
-                    }
+                        }
 
-                });
+                        ;
+
+
+                    });
+                }
             }
         });
-    }}
+    }
+}

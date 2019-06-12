@@ -5,36 +5,38 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.agrima.phonebook.MainActivity">
+    android:gravity="center"
+    tools:context="sharda.ac.in.loginactivity.MainActivity">
+  <ImageView
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:id="@+id/imglogo"
+      android:src="@drawable/logo"/>
 
-   <Button
-       android:layout_width="fill_parent"
-       android:layout_height="wrap_content"
-       android:id="@+id/maa"
-       android:text="Mummy"
-       android:textStyle="italic"
-       android:textColor="#800000" />
 
+  <EditText
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:id="@+id/editTextUserName"
+      android:hint="Enter User Name"
+      android:maxEms="1"/>
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTextPassword"
+        android:inputType="textPassword"
+        android:hint="Enter  Password" />
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/pa"
-        android:text="Papa"
-        android:textStyle="italic"
-        android:textColor="#0000FF" />
+        android:id="@+id/btnSubmit"
+        android:textColor="@color/colorPrimary"
+        android:text="Login"/>
+    <ListView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/list"
+        >
 
-    <Button
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/bh"
-        android:text="Bhai"
-        android:textStyle="italic"
-        android:textColor="#000080" />
-    <Button
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/di"
-        android:text="Didi"
-        android:textStyle="italic"
-        android:textColor="#00FFFF" />
+    </ListView>
 </LinearLayout>
